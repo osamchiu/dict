@@ -50,6 +50,16 @@ test:  $(TESTS)
                 -e cache-misses,cache-references,instructions,cycles \
 				./test_ref --bench $(TEST_DATA)
 
+plot: test
+	gcc -o caculate calculate.c
+	./caculate
+	gnuplot scripts/runtime.gp
+	gnuplot scripts/runtime3.gp
+	gnuplot scripts/runtimept.gp
+	eog runtime.png
+	eog runtime2.png
+	eog runtime3.png	
+
 bench: $(TESTS)
 	@for test in $(TESTS); do\
 		./$$test --bench $(TEST_DATA); \
